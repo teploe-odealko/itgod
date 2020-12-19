@@ -22,9 +22,9 @@ from threading import Thread
 
 def move_units(enemy_buildings, my_buildings, enemy_squads, game_map, game_teams):
     if len(enemy_squads) == 4:
-        enemy_plan_towers = set([tower.to_id for tower in enemy_squads])
+        enemy_plan_towers = set([squad.to_id for squad in enemy_squads])
         if len(enemy_plan_towers) == 4:
-            print(game_teams.my_her.move(my_buildings[0].id, game_map.get_nearest_tower_id(my_buildings[0].id, list(enemy_squads)), 1))
+            print(game_teams.my_her.move(my_buildings[0].id, game_map.get_nearest_tower_id(my_buildings[0].id, list(enemy_plan_towers)), 1))
 
 
 def cast_aoe(enemy_squads, enemy_buildings, game_map, game_teams):

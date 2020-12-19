@@ -105,7 +105,8 @@ class Map(object):
                 "tower_id": tower_id,
                 "distance": self.towers_distance(from_id, tower_id)})
         distances.sort(key=lambda b: b["distance"])
-        return distances[distances.keys()[0]]
+        # print(distances[0])
+        return distances[0]['tower_id']
 
     def get_tower_location(self, tower_id):
         """ Возвращает location башни """
