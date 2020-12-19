@@ -97,6 +97,16 @@ class Map(object):
             result.append(item["tower"])
         return result
 
+    def get_nearest_tower_id(self, from_id, towers_ids):
+        """ Сортирует массив towers по расстояние до from_id """
+        distances = []
+        for tower_id in towers_ids:
+            distances.append({
+                "tower_id": tower_id,
+                "distance": self.towers_distance(from_id, tower_id)})
+        distances.sort(key=lambda b: b["distance"])
+        return distances[distances.keys()[0]]
+
     def get_tower_location(self, tower_id):
         """ Возвращает location башни """
         for link in self.links:

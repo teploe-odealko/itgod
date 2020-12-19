@@ -15,9 +15,9 @@ game_params = Parameters(game)  # параметры игры
 game_teams = Teams(game)  # моя команда
 
 def main():
-    state = State(input(), game_teams, game_params)
-    if game_teams.enemy_team[0].hero_type == HeroType.Warrior:
-        warrior(game_map, game_params, game_teams)
+    # state = State(input(), game_teams, game_params)
+    # if game_teams.enemy_team[0].hero_type == HeroType.Warrior:
+    warrior(game_map, game_params, game_teams)
 
 
 main()
