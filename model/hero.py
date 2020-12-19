@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from model.abilites import AbilityType
 from enum import Enum
 import json

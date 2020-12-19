@@ -1,17 +1,12 @@
 from utils import update_state
 from model.abilites import AbilityType
 from threading import Thread
-from model.map import Map
-from model.parameters import Parameters
-from model.teams import Teams
 
 
-def start_strategy(enemy_squads, state, my_buildings, enemy_buildings, game):
-    game_map = Map(game)  # карта игрового мира
-    game_teams = Teams(game)  # моя команда
+def start_strategy(enemy_squads, state, my_buildings, enemy_buildings, game_map, game_params, game_teams):
     while len(enemy_squads) == 0:
         state, my_buildings, my_squads, enemy_buildings, \
-            enemy_squads, neutral_buildings, forges_buildings = update_state(game)
+            enemy_squads, neutral_buildings, forges_buildings = update_state(game_map, game_params, game_teams)
         continue
     if state.ability_ready(AbilityType.Area_damage):
         location = game_map.get_tower_location(enemy_buildings[0].id)
@@ -23,15 +18,14 @@ def start_strategy(enemy_squads, state, my_buildings, enemy_buildings, game):
     print(game_teams.my_her.move(my_buildings[0].id, enemy_buildings[0].id, 1))
 
 
-def warrior(game):
-
+def warrior(game_map, game_params, game_teams):
     while True:
         try:
             state, my_buildings, my_squads, enemy_buildings, \
-                enemy_squads, neutral_buildings, forges_buildings = update_state(game)
+                enemy_squads, neutral_buildings, forges_buildings = update_state(game_map, game_params, game_teams)
 
             # invisible_ability_th = Thread(target=start_strategy, args=(enemy_squads, state, my_buildings, enemy_buildings))
-            x = Thread(target=start_strategy, args=(enemy_squads, state, my_buildings, enemy_buildings, game))
+            x = Thread(target=start_strategy, args=(enemy_squads, state, my_buildings, enemy_buildings, game_map, game_params, game_teams))
             x.start()
 
             # if state.ability_ready(AbilityType.Armor):

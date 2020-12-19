@@ -1,25 +1,23 @@
-# coding=utf-8
 from model.hero import *
-
+from model.map import Map
+from model.parameters import Parameters
+from model.state import State
 from model.abilites import AbilityType
 from model.teams import Teams
+from warrior import *
 import json
 import random
 import time
-from warrior import warrior
 
-
-# start_strategy = 1
-
-
+game = json.loads(input())
+game_map = Map(game)  # карта игрового мира
+game_params = Parameters(game)  # параметры игры
+game_teams = Teams(game)  # моя команда
 
 def main():
-    game = json.loads(input())
-    # game_map = Map(game)  # карта игрового мира
-    # game_params = Parameters(game)  # параметры игры
-    game_teams = Teams(game)  # моя команда
+    state = State(input(), game_teams, game_params)
     if game_teams.enemy_team[0].hero_type == HeroType.Warrior:
-        warrior(game)
+        warrior(game_map, game_params, game_teams)
 
 
 main()
